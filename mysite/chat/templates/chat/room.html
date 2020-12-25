@@ -1,0 +1,57 @@
+<!-- chat/templates/chat/room.html -->
+{% extends 'base.html'%}
+{% block content %}
+
+<div style="opacity:0.75">
+    <h3 class="badge badge-info">Chat Box</h3>
+    <div class="alert alert-info p-3 mb-2 bg-transparent text-dark" role="alert">
+        <textarea readonly style="font-family:myFont;font-size:15pt;color: lightskyblue;opacity: 0.9;" id="chat-log" class="form-control" cols="50" rows="10"></textarea>
+    </div>
+    <br>
+    <div>
+        <input id="chat-message-input" type="text" placeholder="say something to others in the room :)"
+            class="form-control text-secondary" size="100"><br>
+    </div>
+    <div>
+        <input hidden id="chat-message-submit" type="button" class="btn btn-primary" value="Send">
+    </div>
+
+    {{ room_name|json_script:"room-name" }}   
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent); //为了获得room-name的值，并在js中处理需要进行一些处理
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function (e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function (e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
+</div>
+
+        {% endblock %}

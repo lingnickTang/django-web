@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block content %}
+<script>
+    function add(){
+        var n1 = document.getElementById("n1").value;
+        var n2 = document.getElementById("n2").value;
+        document.getElementById('res').value = parseFloat(n1)+parseFloat(n2);
+    };
+</script>
+<div style="opacity: 0.7;">
+    <h1 style="color: white;">hello world!</h1>
+    <input type="text" placeholder="num1" id="n1"/>+
+    <input type="text" placeholder="num2" id="n2"/>
+    <input class="btn-primary" type="button" value="add" onclick="add()"/>
+    <input type="text" placeholder="result" id="res"/>
+</div>
+
+{% endblock %}

@@ -1,0 +1,465 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<!--CSS-->
+<style>
+    #preview {
+        width: 500px;
+        height: 500px;
+        border: 1px white;
+    }
+
+    .reg {
+        width: 300px;
+        height: 100px;
+        border: 1px white;
+        opacity: 0.8;
+    }
+
+    .regTable {
+        position: absolute;
+        opacity: 0.8;
+        left: 50%;
+        top: 80%;
+        transform: translateY(-50%);
+    }
+
+    .stagesTable {
+        position: absolute;
+        opacity: 0.8;
+    }
+
+    .fadeEffect {
+        animation: display 0.5s;
+        -webkit-animation: display 0.5s;
+        animation-fill-mode: forwards;
+        animation-delay: 1.5s;
+    }
+
+    table,
+    table tr th,
+    table tr td {
+        border: 1px solid white;
+    }
+</style>
+
+<!--coooooool-->
+<div>
+    <div class="title" style="max-width:1335px;z-index:-1;position:absolute;left:400px;top:250px;">
+        <div style="width:900px;">
+            <p style="font-family:myFont;font-size:40pt;"><span style="color:rgb(255,255,255); opacity:2">Y86</span>
+                Simulator</p>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            $("#divid").hide(1);
+        }, 0);
+        setTimeout(function () {
+            $("#divid").show(2000);
+        }, 1500);
+    </script>
+</div>
+
+
+<div id="divid">
+    <!--input area-->
+    <div>
+        <div id="file-info"></div>
+        <input style="opacity: 0.7;" id="text-file" type="file">
+        <div style="font-family: 'Courier New'; opacity:0.7;">
+            <textarea wrap="off" style="width:1000px" readonly id="preview" name="text"></textarea>
+        </div>
+    </div>
+
+    <!--control-->
+    <div>
+        <div>
+            <form style="opacity: 0.7;" oninput="x.value=parseFloat(a.value)">speed
+                <input type="range" id="speed" min='0' max="1.5" step="0.05" value="0.75">
+                <output name="output" for="speed"></output>
+            </form>
+        </div>
+        <div style="opacity:0.7" class="btn-group" role="group" aria-label="Basic example">
+            <input type="button" class="btn btn-danger" id="set" value="set">
+            <input type="button" class="btn btn-success" id="going" value="going">
+            <input type="button" class="btn btn-warning" id="stop" value="stop">
+            <input type="button" class="btn btn-primary" id="step" value="step">
+        </div>
+    </div>
+
+    <!--register using table-->
+    <div class="regTable">
+        <!--class="table table-sm "-->
+        <table>
+            <thead>
+                <tr>
+                    <th width="20px" scope="col">#</th>
+                    <th width="40px" scope="col">First</th>
+                    <th width="150px" scope="col">val</th>
+                    <th width="40px" scope="col">Second</th>
+                    <th width="150px" scope="col">val</th>
+                    <th width="40px" scope="col">Third</th>
+                    <th width="150px" scope="col">val</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="alert-primary">
+                    <th scope="row">1</th>
+                    <td>rax</td>
+                    <td id="rax"></td>
+                    <td>rcx</td>
+                    <td id="rcx"></td>
+                    <td>rdx</td>
+                    <td id="rdx"></td>
+                </tr>
+                <tr class="alert-success">
+                    <th scope="row">2</th>
+                    <td>rbx</td>
+                    <td id="rbx"></td>
+                    <td>rsp</td>
+                    <td id="rsp"></td>
+                    <td>rbp</td>
+                    <td id="rbp"></td>
+                </tr>
+                <tr class="alert-danger">
+                    <th scope="row">3</th>
+                    <td>rsi</td>
+                    <td id="rsi"></td>
+                    <td>rdi</td>
+                    <td id="rdi"></td>
+                    <td>r8</td>
+                    <td id="r8"></td>
+                </tr>
+                <tr class="alert-warning">
+                    <th scope="row">4</th>
+                    <td>r9</td>
+                    <td id="r9"></td>
+                    <td>r10</td>
+                    <td id="r10"></td>
+                    <td>r11</td>
+                    <td id="r11"></td>
+                </tr>
+                <tr class="alert-info">
+                    <th scope="row">5</th>
+                    <td>r12</td>
+                    <td id="r12"></td>
+                    <td>r13</td>
+                    <td id="r13"></td>
+                    <td>r14</td>
+                    <td id="r14"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--stages-->
+    <div class="stagesTable">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th width="30px" scope="col">1</th>
+                    <th width="80px" scope="col">2</th>
+                    <th width="80px" scope="col">3</th>
+                    <th width="80px" scope="col">4</th>
+                    <th width="80px" scope="col">5</th>
+                    <th width="80px" scope="col">6</th>
+                    <th width="80px" scope="col">7</th>
+                    <th width="80px" scope="col">8</th>
+                    <th width="80px" scope="col">9</th>
+                    <th width="80px" scope="col">10</th>
+                    <th width="80px" scope="col">11</th>
+                    <th width="80px" scope="col">12</th>
+                    <th width="80px" scope="col">13</th>
+                    <th width="80px" scope="col">14</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="alert-primary">
+                    <th scope="row">W</th>
+                    <td>stat</td>
+                    <td>icode</td>
+                    <td colspan="2">valE</td>
+                    <td colspan="2">valM</td>
+                    <td>dstE</td>
+                    <td>dstM</td>
+                    <td></td>
+                    <td></td>
+                    <td>ZF</td>
+                    <td>SF</td>
+                    <td>OF</td>
+                </tr>
+                <tr class="alert-secondary">
+                    <th scope="row"></th>
+                    <td id="W_stat"></td>
+                    <td id="W_icode"></td>
+                    <td id="W_valE" colspan="2"></td>
+                    <td id="W_valM" colspan="2"></td>
+                    <td id="W_dstE"></td>
+                    <td id="W_dstM"></td>
+                    <td></td>
+                    <td></td>
+                    <td id="ZF"></td>
+                    <td id="SF"></td>
+                    <td id="OF"></td>
+                </tr>
+                <tr class="alert-success">
+                    <th scope="row">M</th>
+                    <td>stat</td>
+                    <td>icode</td>
+                    <td>Cnd</td>
+                    <td colspan="2">valE</td>
+                    <td colspan="2">valA</td>
+                    <td>dstE</td>
+                    <td>dstM</td>
+                    <td></td>
+                    <td></td>
+                    <td>Stat</td>
+                </tr>
+                <tr class="alert-danger">
+                    <th scope="row"></th>
+                    <td id="M_stat"></td>
+                    <td id="M_icode"></td>
+                    <td id="M_Cnd"></td>
+                    <td id="M_valE" colspan="2"></td>
+                    <td id="M_valA" colspan="2"></td>
+                    <td id="M_dstE"></td>
+                    <td id="M_dstM"></td>
+                    <td></td>
+                    <td></td>
+                    <td id="Stat"></td>
+                </tr>
+                <tr class="alert-warning">
+                    <th scope="row">E</th>
+                    <td>stat</td>
+                    <td>icode</td>
+                    <td>ifun</td>
+                    <td colspan="2">valC</td>
+                    <td colspan="2">valA</td>
+                    <td colspan="2">valB</td>
+                    <td>dstE</td>
+                    <td>dstM</td>
+                    <td>srcA</td>
+                    <td>srcB</td>
+                </tr>
+                <tr class="alert-info">
+                    <th scope="row"></th>
+                    <td id="E_stat"></td>
+                    <td id="E_icode"></td>
+                    <td id="E_ifun"></td>
+                    <td id="E_valC" colspan="2"></td>
+                    <td id="E_valA" colspan="2"></td>
+                    <td id="E_valB" colspan="2"></td>
+                    <td id="E_dstE"></td>
+                    <td id="E_dstM"></td>
+                    <td id="E_srcA"></td>
+                    <td id="E_srcB"></td>
+                </tr>
+                <tr class="alert-light">
+                    <th scope="row">D</th>
+                    <td>stat</td>
+                    <td>icode</td>
+                    <td>ifun</td>
+                    <td>rA</td>
+                    <td>rB</td>
+                    <td colspan="2">valC</td>
+                    <td colspan="2">valP</td>
+                </tr>
+                <tr class="alert-dark">
+                    <th scope="row"></th>
+                    <td id="D_stat"></td>
+                    <td id="D_icode"></td>
+                    <td id="D_ifun"></td>
+                    <td id="D_rA"></td>
+                    <td id="D_rB"></td>
+                    <td colspan="2" id="D_valC"></td>
+                    <td colspan="2" id="D_valP"></td>
+                </tr>
+                <tr class="alert-primary">
+                    <th scope="row">F</th>
+                    <td>predPC</td>
+                </tr>
+                <tr class="alert-danger">
+                    <th scope="row"></th>
+                    <td id="F_predPC"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--file chosen function-->
+
+<script>
+    window.onload = function () {
+        var fileInput = document.getElementById('text-file');
+        var info = document.getElementById('file-info');
+        var preview = document.getElementById('preview');
+
+        fileInput.addEventListener('change', function () {
+            console.log('change...');
+            preview.style.backgroundImage = '';
+            if (!fileInput.value) {
+                info.innerHTML = '没有选择文件';
+                return;
+            }
+            var file = fileInput.files[0];
+            var fileSuffix = file.name.substring(file.name.lastIndexOf('.'))
+            //可是试着实现ys->yo
+            if (file.type !== 'text/plain' && fileSuffix !== '.yo' && fileSuffix !== '.ys') {
+                alert('不是有效的文本文件!');
+                return;
+            }
+
+            if (!FileReader) {
+                alert('当前浏览器不支持FileReader对象');
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                console.log('reader.onload');
+                var data = e.target.result;
+                preview.innerHTML = data;
+            };
+            reader.readAsText(file, 'utf-8');
+        });
+    };
+</script>
+
+<!--judgement fuctions-->
+
+<!--socket-->
+<script>
+    const IDESocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/IDE/'
+    );
+    var stop = 1;
+    var isValid = 0;
+    IDESocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        isValid = data.isValid;
+        if (!isValid) {
+            alert("文件内容有错，请重新输入！");
+            return;
+        }
+        document.querySelector('#rax').innerHTML = data.rax;
+        document.querySelector('#rcx').innerHTML = data.rcx;
+        document.querySelector('#rdx').innerHTML = data.rdx;
+        document.querySelector('#rbx').innerHTML = data.rbx;
+        document.querySelector('#rsp').innerHTML = data.rsp;
+        document.querySelector('#rbp').innerHTML = data.rbp;
+        document.querySelector('#rsi').innerHTML = data.rsi;
+        document.querySelector('#rdi').innerHTML = data.rdi;
+        document.querySelector('#r8').innerHTML = data.r8;
+        document.querySelector('#r9').innerHTML = data.r9;
+        document.querySelector('#r10').innerHTML = data.r10;
+        document.querySelector('#r11').innerHTML = data.r11;
+        document.querySelector('#r12').innerHTML = data.r12;
+        document.querySelector('#r13').innerHTML = data.r13;
+        document.querySelector('#r14').innerHTML = data.r14;
+
+        //W
+        document.querySelector('#W_stat').innerHTML = data.W_stat;
+        document.querySelector('#W_icode').innerHTML = data.W_icode;
+        document.querySelector('#W_valE').innerHTML = data.W_valE;
+        document.querySelector('#W_valM').innerHTML = data.W_valM;
+        document.querySelector('#W_dstE').innerHTML = data.W_dstE;
+        document.querySelector('#W_dstM').innerHTML = data.W_dstM;
+
+        //M
+        document.querySelector('#M_stat').innerHTML = data.M_stat;
+        document.querySelector('#M_icode').innerHTML = data.M_icode;
+        document.querySelector('#M_Cnd').innerHTML = data.M_Cnd;
+        document.querySelector('#M_valE').innerHTML = data.M_valE;
+        document.querySelector('#M_valA').innerHTML = data.M_valA;
+        document.querySelector('#M_dstE').innerHTML = data.M_dstE;
+        document.querySelector('#M_dstM').innerHTML = data.M_dstM;
+
+        //E
+        document.querySelector('#E_stat').innerHTML = data.E_stat;
+        document.querySelector('#E_icode').innerHTML = data.E_icode;
+        document.querySelector('#E_ifun').innerHTML = data.E_ifun;
+        document.querySelector('#E_valC').innerHTML = data.E_valC;
+        document.querySelector('#E_valA').innerHTML = data.E_valA;
+        document.querySelector('#E_valB').innerHTML = data.E_valB;
+        document.querySelector('#E_dstE').innerHTML = data.E_dstE;
+        document.querySelector('#E_dstM').innerHTML = data.E_dstM;
+        document.querySelector('#E_srcA').innerHTML = data.E_srcA;
+        document.querySelector('#E_srcB').innerHTML = data.E_srcB;
+
+        //D
+        document.querySelector('#D_stat').innerHTML = data.D_stat;
+        document.querySelector('#D_icode').innerHTML = data.D_icode;
+        document.querySelector('#D_ifun').innerHTML = data.D_ifun;
+        document.querySelector('#D_rA').innerHTML = data.D_rA;
+        document.querySelector('#D_rB').innerHTML = data.D_rB;
+        document.querySelector('#D_valC').innerHTML = data.D_valC;
+        document.querySelector('#D_valP').innerHTML = data.D_valP;
+
+        //F
+        document.querySelector('#F_predPC').innerHTML = data.F_predPC;
+
+        //
+        document.querySelector('#ZF').innerHTML = data.ZF;
+        document.querySelector('#SF').innerHTML = data.SF;
+        document.querySelector('#OF').innerHTML = data.OF;
+        document.querySelector('#Stat').innerHTML = data.Stat;
+
+
+        if (data.program_out === 1) {
+            stop = 1;
+        }
+
+        if (!stop) {
+            var interval = 1.5 - document.querySelector('#speed').value;
+            IDESocket.send(JSON.stringify({
+                "isData": false,
+                "interval": interval,
+            }));
+        }
+    };
+
+    IDESocket.onclose = function (e) {
+        console.error('IDE socket closed unexpectedly');
+    };
+
+    document.querySelector('#step').onclick = function (e) {
+        if (isValid) {
+            IDESocket.send(JSON.stringify({
+                "isData": false,
+                "interval": 0,
+            }))
+        }
+    };
+
+    document.querySelector('#set').onclick = function (e) {
+        const inputData = document.querySelector('#preview').value;
+        stop = 1;
+        IDESocket.send(JSON.stringify({
+            "isData": true,
+            'inputData': inputData,
+        }));
+    };
+
+    document.querySelector('#stop').onclick = function (e) {
+        stop = 1;
+    };
+
+    document.querySelector('#going').onclick = function (e) {
+        var Stat = document.querySelector('#Stat').innerHTML;
+        if (!isValid || (Stat !== "SAOK" && Stat !== "SBUB")) return;
+        stop = 0;
+        var interval = 1.5 - document.querySelector('#speed').value;
+        IDESocket.send(JSON.stringify({
+            "isData": false,
+            "interval": interval,
+        }));
+    };
+
+</script>
+
+{% endblock %}
